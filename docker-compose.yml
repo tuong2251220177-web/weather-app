@@ -1,0 +1,16 @@
+services:
+  gh-runner:
+    image: myoung34/github-runner:latest
+    container_name: gh-runner
+    restart: unless-stopped
+    environment:
+      REPO_URL: https://github.com/tuong2251220177-web/weather-app
+      RUNNER_NAME: wsl-runner-01
+      RUNNER_SCOPE: repo
+      LABELS: wsl,docker,cd
+      RUNNER_WORKDIR: /tmp/runner/work
+      RUNNER_TOKEN: CA4HHLH4I3M6GFQHLUSTPGLJ3S67M
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock
+      - ./runner-data:/runner
+    privileged: true

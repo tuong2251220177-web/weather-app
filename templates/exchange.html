@@ -1,0 +1,210 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Tỷ giá ngoại tệ</title>
+
+    <!-- Tự động refresh sau 10 phút -->
+    <meta http-equiv="refresh" content="600" />
+
+    <style>
+        * {
+            box-sizing: border-box;
+        }
+
+        body {
+            margin: 0;
+            font-family: Arial, sans-serif;
+            background: linear-gradient(135deg, #d1fae5, #ecfdf5);
+            padding: 30px;
+            color: #0f172a;
+        }
+
+        h1 {
+            text-align: center;
+            color: #065f46;
+            margin-bottom: 10px;
+        }
+
+        .subtitle {
+            text-align: center;
+            color: #475569;
+            margin-bottom: 30px;
+        }
+
+        .table-wrap {
+            max-width: 700px;
+            margin: 0 auto;
+            background: white;
+            border-radius: 18px;
+            box-shadow: 0 10px 24px rgba(0, 0, 0, 0.08);
+            overflow: hidden;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+
+        thead {
+            background: #059669;
+            color: white;
+        }
+
+        thead th {
+            padding: 14px 18px;
+            text-align: left;
+            font-size: 15px;
+        }
+
+        tbody tr {
+            border-bottom: 1px solid #e2e8f0;
+            transition: background 0.15s;
+        }
+
+        tbody tr:last-child {
+            border-bottom: none;
+        }
+
+        tbody tr:hover {
+            background: #f0fdf4;
+        }
+
+        tbody td {
+            padding: 14px 18px;
+            font-size: 15px;
+        }
+
+        .flag {
+            font-size: 22px;
+            margin-right: 8px;
+        }
+
+        .code {
+            font-weight: 700;
+            color: #0f766e;
+        }
+
+        .vnd-rate {
+            font-weight: 700;
+            color: #dc2626;
+            font-size: 16px;
+        }
+
+        .error {
+            text-align: center;
+            color: #b91c1c;
+            font-weight: bold;
+            padding: 24px;
+        }
+
+        .actions {
+            text-align: center;
+            margin-top: 28px;
+        }
+
+        .btn {
+            display: inline-block;
+            padding: 12px 22px;
+            border-radius: 10px;
+            font-weight: 600;
+            text-decoration: none;
+            margin: 0 8px;
+        }
+
+        .btn-green {
+            background: #059669;
+            color: white;
+        }
+
+        .btn-blue {
+            background: #2563eb;
+            color: white;
+        }
+
+        .topnav {
+            max-width: 700px;
+            margin: 0 auto 20px;
+            display: flex;
+            gap: 10px;
+        }
+
+        .nav-btn {
+            display: inline-block;
+            padding: 8px 16px;
+            border-radius: 8px;
+            font-weight: 600;
+            font-size: 14px;
+            text-decoration: none;
+            color: white;
+        }
+
+        .nav-home { background: #64748b; }
+        .nav-blue  { background: #2563eb; }
+
+        .note {
+            text-align: center;
+            margin-top: 14px;
+            color: #64748b;
+            font-size: 14px;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="topnav">
+        <a class="nav-btn nav-home" href="/">← Trang chủ</a>
+        <a class="nav-btn nav-blue" href="/thoi-tiet">🌤️ Thời tiết</a>
+    </div>
+
+    <h1>💱 Tỷ giá ngoại tệ</h1>
+    <div class="subtitle">Quy đổi sang Việt Nam Đồng (VND)</div>
+
+    <div class="table-wrap">
+        {% if error %}
+            <div class="error">{{ error }}</div>
+        {% else %}
+        <table>
+            <thead>
+                <tr>
+                    <th>Đồng tiền</th>
+                    <th>Mã</th>
+                    <th>1 đơn vị = (VND)</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for item in rates %}
+                <tr>
+                    <td><span class="flag">{{ item.flag }}</span>{{ item.name }}</td>
+                    <td><span class="code">{{ item.code }}</span></td>
+                    <td>
+                        <span class="vnd-rate">
+                            {% if item.vnd_rate == "N/A" %}
+                                N/A
+                            {% else %}
+                                {{ "{:,.0f}".format(item.vnd_rate) }} ₫
+                            {% endif %}
+                        </span>
+                    </td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+        {% endif %}
+    </div>
+
+    <div class="actions">
+        <a class="btn btn-green" href="/ty-gia">Làm mới ngay</a>
+        <a class="btn btn-blue" href="/thoi-tiet">🌤️ Thời tiết</a>
+        <a class="btn" style="background:#64748b" href="/">🏠 Trang chủ</a>
+    </div>
+
+    <div class="note">
+        {% if not error %}
+            Cập nhật lần cuối: {{ updated }} &nbsp;·&nbsp;
+        {% endif %}
+        Trang sẽ tự động làm mới sau mỗi 10 phút. Nguồn: open.er-api.com
+    </div>
+</body>
+</html>

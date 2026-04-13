@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Thời tiết 3 thành phố</title>
+
+    <!-- Tự động refresh sau 5 phút -->
+    <meta http-equiv="refresh" content="300" />
+
+    <style>
+        * { box-sizing: border-box; }
+
+        body {
+            margin: 0;
+            font-family: Arial, sans-serif;
+            background: linear-gradient(135deg, #dbeafe, #eff6ff);
+            padding: 30px;
+            color: #0f172a;
+        }
+
+        .topnav {
+            max-width: 1100px;
+            margin: 0 auto 20px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .nav-btn {
+            display: inline-block;
+            padding: 8px 16px;
+            border-radius: 8px;
+            font-weight: 600;
+            font-size: 14px;
+            text-decoration: none;
+            color: white;
+        }
+
+        .nav-home  { background: #64748b; }
+        .nav-green { background: #059669; }
+
+        h1 {
+            text-align: center;
+            color: #1e3a8a;
+            margin-bottom: 10px;
+        }
+
+        .subtitle {
+            text-align: center;
+            color: #475569;
+            margin-bottom: 30px;
+        }
+
+        .grid {
+            max-width: 1100px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 20px;
+        }
+
+        .card {
+            background: white;
+            border-radius: 18px;
+            padding: 22px;
+            box-shadow: 0 10px 24px rgba(0, 0, 0, 0.08);
+            transition: transform 0.2s ease;
+        }
+
+        .card:hover { transform: translateY(-4px); }
+
+        .city  { font-size: 24px; font-weight: 700; margin-bottom: 12px; }
+        .icon  { font-size: 56px; margin-bottom: 10px; }
+        .temp  { font-size: 42px; font-weight: 700; color: #dc2626; margin: 8px 0; }
+        .desc  { font-size: 18px; margin-bottom: 12px; color: #334155; }
+        .meta  { margin: 6px 0; color: #475569; font-size: 15px; }
+        .error { color: #b91c1c; font-weight: bold; }
+
+        .actions {
+            text-align: center;
+            margin-top: 28px;
+        }
+
+        .btn {
+            display: inline-block;
+            color: white;
+            text-decoration: none;
+            padding: 12px 18px;
+            border-radius: 10px;
+            font-weight: 600;
+            margin: 0 6px;
+        }
+
+        .btn-blue  { background: #2563eb; }
+        .btn-gray  { background: #64748b; }
+        .btn-green { background: #059669; }
+
+        .note {
+            text-align: center;
+            margin-top: 14px;
+            color: #64748b;
+            font-size: 14px;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="topnav">
+        <a class="nav-btn nav-home" href="/">← Trang chủ</a>
+        <a class="nav-btn nav-green" href="/ty-gia">💱 Tỷ giá</a>
+    </div>
+
+    <h1>🌤️ Thời tiết hiện tại</h1>
+    <div class="subtitle">Hà Nội · Đà Nẵng · TP. Hồ Chí Minh</div>
+
+    <div class="grid">
+        {% for item in weather_data %}
+        <div class="card">
+            <div class="city">{{ item.city }}</div>
+
+            {% if item.error %}
+                <div class="error">{{ item.error }}</div>
+            {% else %}
+                <div class="icon">{{ item.icon }}</div>
+                <div class="temp">{{ item.temperature }}°C</div>
+                <div class="desc">{{ item.description }}</div>
+                <div class="meta">💨 Gió: {{ item.windspeed }} km/h</div>
+                <div class="meta">💧 Độ ẩm: {{ item.humidity }}%</div>
+                <div class="meta">🕒 Cập nhật: {{ item.time }}</div>
+            {% endif %}
+        </div>
+        {% endfor %}
+    </div>
+
+    <div class="actions">
+        <a class="btn btn-blue" href="/thoi-tiet">Làm mới ngay</a>
+        <a class="btn btn-gray" href="/">🏠 Trang chủ</a>
+        <a class="btn btn-green" href="/ty-gia">💱 Tỷ giá</a>
+    </div>
+
+    <div class="note">
+        Trang sẽ tự động làm mới sau mỗi 5 phút.
+    </div>
+</body>
+</html>

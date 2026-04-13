@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Vietnam Info App</title>
+    <style>
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+
+        body {
+            font-family: Arial, sans-serif;
+            min-height: 100vh;
+            background: linear-gradient(135deg, #1e3a8a 0%, #065f46 100%);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            padding: 40px 20px;
+            color: white;
+        }
+
+        .logo {
+            font-size: 64px;
+            margin-bottom: 16px;
+        }
+
+        h1 {
+            font-size: 32px;
+            font-weight: 800;
+            margin-bottom: 8px;
+            letter-spacing: -0.5px;
+        }
+
+        .tagline {
+            font-size: 16px;
+            color: rgba(255,255,255,0.75);
+            margin-bottom: 52px;
+        }
+
+        .cards {
+            display: flex;
+            gap: 28px;
+            flex-wrap: wrap;
+            justify-content: center;
+            max-width: 760px;
+            width: 100%;
+        }
+
+        .feature-card {
+            background: rgba(255, 255, 255, 0.12);
+            backdrop-filter: blur(12px);
+            border: 1px solid rgba(255,255,255,0.2);
+            border-radius: 24px;
+            padding: 40px 36px;
+            width: 320px;
+            text-align: center;
+            text-decoration: none;
+            color: white;
+            transition: transform 0.2s ease, background 0.2s ease;
+        }
+
+        .feature-card:hover {
+            transform: translateY(-6px);
+            background: rgba(255, 255, 255, 0.22);
+        }
+
+        .feature-icon {
+            font-size: 56px;
+            margin-bottom: 18px;
+        }
+
+        .feature-title {
+            font-size: 22px;
+            font-weight: 700;
+            margin-bottom: 10px;
+        }
+
+        .feature-desc {
+            font-size: 14px;
+            color: rgba(255,255,255,0.75);
+            line-height: 1.6;
+        }
+
+        .feature-btn {
+            display: inline-block;
+            margin-top: 22px;
+            padding: 10px 24px;
+            border-radius: 10px;
+            font-size: 14px;
+            font-weight: 600;
+        }
+
+        .btn-blue  { background: #2563eb; }
+        .btn-green { background: #059669; }
+
+        footer {
+            margin-top: 52px;
+            font-size: 13px;
+            color: rgba(255,255,255,0.45);
+        }
+    </style>
+</head>
+<body>
+
+    <div class="logo">🇻🇳</div>
+    <h1>Vietnam Info App</h1>
+    <p class="tagline">Tra cứu thời tiết &amp; tỷ giá ngoại tệ nhanh chóng</p>
+
+    <div class="cards">
+
+        <a class="feature-card" href="/thoi-tiet">
+            <div class="feature-icon">🌤️</div>
+            <div class="feature-title">Thời tiết</div>
+            <div class="feature-desc">
+                Xem thời tiết hiện tại tại Hà Nội, Đà Nẵng và TP. Hồ Chí Minh —
+                nhiệt độ, độ ẩm, tốc độ gió, cập nhật liên tục.
+            </div>
+            <span class="feature-btn btn-blue">Xem thời tiết →</span>
+        </a>
+
+        <a class="feature-card" href="/ty-gia">
+            <div class="feature-icon">💱</div>
+            <div class="feature-title">Tỷ giá ngoại tệ</div>
+            <div class="feature-desc">
+                Tỷ giá các đồng tiền phổ biến quy đổi sang Việt Nam Đồng (VND),
+                dữ liệu cập nhật từ open.er-api.com.
+            </div>
+            <span class="feature-btn btn-green">Xem tỷ giá →</span>
+        </a>
+
+    </div>
+
+    <footer>Dữ liệu từ open-meteo.com &amp; open.er-api.com</footer>
+
+</body>
+</html>

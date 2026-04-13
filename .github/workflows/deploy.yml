@@ -27,7 +27,7 @@ jobs:
               container_name: weather-fastapi
               restart: unless-stopped
               ports:
-                - "8000:8000"
+                - "8090:8000"
           EOF
 
       - name: Pull latest image
